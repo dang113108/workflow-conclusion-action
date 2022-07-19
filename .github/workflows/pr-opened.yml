@@ -18,7 +18,7 @@ jobs:
         with:
           PROJECT: ${{ env.PROJECT }}
           COLUMN: ${{ env.PR_COLUMN }}
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
 
   assignAuthor:
     name: Assign author to PR
