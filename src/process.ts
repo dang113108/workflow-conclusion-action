@@ -18,9 +18,13 @@ export const getJobs = async(octokit: Octokit, context: Context): Promise<Array<
   },
 );
 
-export const getJobConclusions = (jobs: Array<{ conclusion: string | null }>): Array<string> => Utils.uniqueArray(
+export const getJobConclusions = (jobs: Array<{ conclusion: string | null, name: string | '' }>): Array<string> => getInput('SPECIFIC_JOBS_PREFIX') !== '' ? Utils.uniqueArray(
   jobs
-    .filter((job): job is { conclusion: string } => null !== job.conclusion)
+    .filter((job): job is { name: string, conclusion: string } => null !== job.conclusion && job.name.startsWith(getInput('SPECIFIC_JOBS_PREFIX')))
+    .map(job => job.conclusion),
+) : Utils.uniqueArray(
+  jobs
+    .filter((job): job is { name: string, conclusion: string } => null !== job.conclusion)
     .map(job => job.conclusion),
 );
 

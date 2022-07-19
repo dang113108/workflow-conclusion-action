@@ -25,14 +25,17 @@ inputs:
     description: Whether to report as success only if all jobs are successful
     required: false
     default: "false"
+  SPECIFIC_JOBS_PREFIX:
+    description: Only check the jobs status with the specified prefix
+    required: false
 
 outputs:
   conclusion:
     description: Workflow conclusion
 
 branding:
-  icon: 'check-circle'
-  color: 'green'
+  icon: "check-circle"
+  color: "green"
 
 runs:
   using: node16
